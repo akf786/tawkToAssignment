@@ -93,6 +93,6 @@
         </tableViewCell>
     </objects>
     <resources>
-        <image name="pencil" width="512" height="512"/>
+        <image name="pencil" width="1500" height="1600"/>
     </resources>
 </document>

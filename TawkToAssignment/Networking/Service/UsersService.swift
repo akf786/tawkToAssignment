@@ -21,7 +21,7 @@ protocol UsersService {
     func saveUserProfileInDB(jsonData: Data, completion: @escaping(_ users: UserProfile?) -> ())
     func fetchProfileIfSavedOf(userName: String, completionHandler: @escaping (UserProfile?) -> Void)
     func saveNotesOf(userName: String, withNotes: String, completionHandler: @escaping () -> Void)
-    func setStatusOfNotesAdded(userName: String, completionHandler: @escaping () -> Void)
+    func setStatusOfNotesAdded(userName: String, notes: String, completionHandler: @escaping () -> Void)
     func setStatusToSeenFor(userName: String, completionHandler: @escaping () -> Void)
 }
 
@@ -162,7 +162,7 @@ class UsersServiceImp : UsersService {
         }
     }
     
-    func setStatusOfNotesAdded(userName: String, completionHandler: @escaping () -> Void) {
+    func setStatusOfNotesAdded(userName: String, notes: String, completionHandler: @escaping () -> Void) {
         let managedObjectContext = persistentContainer.viewContext
         let fetchRequest = NSFetchRequest<User>(entityName: "User")
         fetchRequest.fetchLimit = 1
@@ -170,6 +170,7 @@ class UsersServiceImp : UsersService {
         do {
             let profile = try managedObjectContext.fetch(fetchRequest).first
             profile?.setValue(true, forKey: "isNotesAdded")
+            profile?.setValue(notes, forKey: "notes")
             try managedObjectContext.save()
             completionHandler()
         } catch _ {

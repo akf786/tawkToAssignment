@@ -23,8 +23,11 @@ class UserProfileViewController: UIViewController {
         self.title = viewModel?.title
         self.bindViewModel()
         self.viewModel?.viewDidLoad()
+        self.addClickToDismissView()
         self.view.backgroundColor = AppConstants.Colors.outerViewColor
+        self.userProfileView.activityIndicator.stopAnimating()
     }
+    
     
     
     //MARK: - Actions
@@ -33,6 +36,10 @@ class UserProfileViewController: UIViewController {
         self.viewModel?.saveNotes(withText: self.userProfileView.notesTextView.text)
     }
     
+    @objc
+    func singleTap(sender: UITapGestureRecognizer) {
+        self.view.endEditing(true)
+    }
     
 }
 
@@ -98,6 +105,14 @@ extension UserProfileViewController {
                 self.userProfileView.userProfileImage.downloadImage(from: imageUrl)
             }
         }
+    }
+    
+    private func addClickToDismissView() {
+        let singleTapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.singleTap(sender:)))
+        singleTapGestureRecognizer.numberOfTapsRequired = 1
+        singleTapGestureRecognizer.isEnabled = true
+        singleTapGestureRecognizer.cancelsTouchesInView = false
+        self.view.addGestureRecognizer(singleTapGestureRecognizer)
     }
     
 }

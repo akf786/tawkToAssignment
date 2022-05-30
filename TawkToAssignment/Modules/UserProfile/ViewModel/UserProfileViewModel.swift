@@ -14,7 +14,7 @@ protocol UserProfileViewModel {
     var userProfile: UserProfile? { get set }
     var title: String { get }
     var completionHandler: UserProfileViewModelOutputHandler? { get set }
-    
+    var delegate: UserProfileViewModelDelegate? { get set }
     func viewDidLoad()
     func saveNotes(withText: String)
 }

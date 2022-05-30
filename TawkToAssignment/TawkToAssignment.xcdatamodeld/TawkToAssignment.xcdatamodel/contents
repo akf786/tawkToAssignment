@@ -6,6 +6,7 @@
         <attribute name="isNotesAdded" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="isSeen" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="login" optional="YES" attributeType="String"/>
+        <attribute name="notes" optional="YES" attributeType="String"/>
         <attribute name="siteAdmin" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="type" optional="YES" attributeType="String"/>
     </entity>
@@ -22,7 +23,7 @@
         <attribute name="type" optional="YES" attributeType="String"/>
     </entity>
     <elements>
-        <element name="User" positionX="-63" positionY="-18" width="128" height="134"/>
+        <element name="User" positionX="-63" positionY="-18" width="128" height="14"/>
         <element name="UserProfile" positionX="-54" positionY="45" width="128" height="179"/>
     </elements>
 </model>

@@ -21,12 +21,14 @@ class User: NSManagedObject, Decodable {
     @NSManaged var siteAdmin: Bool
     @NSManaged var isNotesAdded: Bool
     @NSManaged var isSeen: Bool
+    @NSManaged var notes: String?
     
     enum CodingKeys: String, CodingKey {
         case login
         case id
         case avatarURL = "avatar_url"
         case type
+        case notes
         case siteAdmin = "site_admin"
     }
     
@@ -48,6 +50,7 @@ class User: NSManagedObject, Decodable {
         self.avatarURL = try container.decodeIfPresent(String.self, forKey: .avatarURL)
         self.type = try container.decodeIfPresent(String.self, forKey: .type)
         self.siteAdmin = try container.decodeIfPresent(Bool.self, forKey: .siteAdmin) ?? false
+        self.notes = try container.decodeIfPresent(String.self, forKey: .notes) ?? ""
     }
         
 }

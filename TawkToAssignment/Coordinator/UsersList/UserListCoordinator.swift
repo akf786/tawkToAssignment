@@ -40,7 +40,6 @@ class UserListCoordinator: Coordinator {
 //MARK: - TvShowsList Coordinator Delegate
 extension UserListCoordinator : UsersListViewModelCoordinatorDelegate{
     
-    /// This function called when user tapped on add new tv show button on listing screen
     func didTapOnUser(user: User, delegate: UsersListViewModelImp) {
         
         let userProfileCoordinator = UserProfileCoordinator(navigationController: self.rootViewController,
@@ -48,6 +47,7 @@ extension UserListCoordinator : UsersListViewModelCoordinatorDelegate{
                                                     user: user,
                                                     persistentContainer: self.container)
         if let userProfileVC = userProfileCoordinator.start() as? UserProfileViewController {
+            userProfileVC.viewModel?.delegate = delegate
             self.rootViewController.pushViewController(userProfileVC, animated: true)
         }
     }

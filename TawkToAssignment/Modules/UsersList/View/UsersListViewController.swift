@@ -22,6 +22,7 @@ class UsersListViewController: UIViewController {
         self.registerNibs()
         self.setupTableView()
         self.bindViewModel()
+        self.addClickToDismissView()
         self.title = viewModel?.title
         self.usersListingView.searchView.delegate = self
         self.usersListingView.noInternetHeightCnst.constant = 0
@@ -30,6 +31,12 @@ class UsersListViewController: UIViewController {
         
     }
 
+    
+    //MARK: - Actions
+    @objc
+    func singleTap(sender: UITapGestureRecognizer) {
+        self.view.endEditing(true)
+    }
 }
 
 //MARK: - ViewModel Binding
@@ -95,6 +102,14 @@ extension UsersListViewController {
     private func setupTableView() {
         self.usersListingView.tableView.dataSource = self
         self.usersListingView.tableView.delegate = self
+    }
+    
+    private func addClickToDismissView() {
+        let singleTapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.singleTap(sender:)))
+        singleTapGestureRecognizer.numberOfTapsRequired = 1
+        singleTapGestureRecognizer.isEnabled = true
+        singleTapGestureRecognizer.cancelsTouchesInView = false
+        self.view.addGestureRecognizer(singleTapGestureRecognizer)
     }
     
 }

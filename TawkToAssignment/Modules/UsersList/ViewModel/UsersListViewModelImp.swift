@@ -73,6 +73,7 @@ class UsersListViewModelImp: UsersListViewModel {
                 return
             }
             
+            self?.users[index].isSeen = true
             weakSelf.coordinatorDelegate?.didTapOnUser(user: user, delegate: weakSelf)
         }
         
@@ -85,26 +86,28 @@ class UsersListViewModelImp: UsersListViewModel {
             
             let viewModel: BaseUserListCellViewModel
             
-            if count % 4 == 0 {
-                viewModel = InvertedUserListingCellViewModel(userName: user.login ?? "",
-                                                             userType: user.type ?? "",
-                                                             imageURL: URL(string: user.avatarURL ?? ""),
-                                                             profileSeen: user.isSeen,
-                                                             notesAdded: user.isNotesAdded)
-                
+            if user.isNotesAdded {
+                viewModel = NoteUserListingCellViewModel(userName: user.login ?? "",
+                                                         userType: user.type ?? "",
+                                                         imageURL: URL(string: user.avatarURL ?? ""),
+                                                         profileSeen: user.isSeen)
             } else {
-                if user.isNotesAdded {
-                    viewModel = NoteUserListingCellViewModel(userName: user.login ?? "",
-                                                             userType: user.type ?? "",
-                                                             imageURL: URL(string: user.avatarURL ?? ""),
-                                                             profileSeen: user.isSeen)
-                } else {
-                    viewModel = NormalUserListingCellViewModel(userName: user.login ?? "",
-                                                               userType: user.type ?? "",
-                                                               imageURL: URL(string: user.avatarURL ?? ""),
-                                                               profileSeen: user.isSeen)
-                }
+                viewModel = NormalUserListingCellViewModel(userName: user.login ?? "",
+                                                           userType: user.type ?? "",
+                                                           imageURL: URL(string: user.avatarURL ?? ""),
+                                                           profileSeen: user.isSeen)
             }
+            
+//            if count % 4 == 0 {
+//                viewModel = InvertedUserListingCellViewModel(userName: user.login ?? "",
+//                                                             userType: user.type ?? "",
+//                                                             imageURL: URL(string: user.avatarURL ?? ""),
+//                                                             profileSeen: user.isSeen,
+//                                                             notesAdded: user.isNotesAdded)
+//
+//            } else {
+//
+//            }
             
             self.cellViewModels.append(viewModel)
         }
@@ -120,7 +123,12 @@ class UsersListViewModelImp: UsersListViewModel {
             
         } else {
             self.searchedUsers = []
-            let list = self.users.filter({ $0.login?.contains(text) ?? false })
+            let list = self.users.filter { user in
+                let isUserNameContains = user.login?.localizedCaseInsensitiveContains(text) ?? false
+                let isNotesContains = user.notes?.localizedCaseInsensitiveContains(text) ?? false
+                return isUserNameContains || isNotesContains
+            }
+            
             self.searchedUsers.append(contentsOf: list)
             self.appendCellViewModels(for: self.searchedUsers)
         }
@@ -176,5 +184,20 @@ extension UsersListViewModelImp {
         }
     }
     
+    
+}
+
+
+//MARK: - UserProfileViewModelDelegate
+extension UsersListViewModelImp: UserProfileViewModelDelegate {
+    
+    func didSaveNoteFor(userId: Int16, notes: String) {
+        if let index = self.users.firstIndex(where: { $0.id == userId }) {
+            self.users[index].isNotesAdded = true
+            self.users[index].notes = notes
+            self.cellViewModels = []
+            self.refreshData(self.users)
+        }
+    }
     
 }

@@ -7,8 +7,15 @@
 
 import Foundation
 
+protocol UserProfileViewModelDelegate: AnyObject {
+    func didSaveNoteFor(userId: Int16, notes: String)
+}
+
+
 class UserProfileViewModelImpl: UserProfileViewModel {
     
+    
+    weak var delegate: UserProfileViewModelDelegate?
     var userProfile: UserProfile?
     private var user: User
     
@@ -40,8 +47,12 @@ class UserProfileViewModelImpl: UserProfileViewModel {
     
     func saveNotes(withText: String) {
         self.service.saveNotesOf(userName: self.user.login ?? "", withNotes: withText) { [weak self] in
-            self?.service.setStatusOfNotesAdded(userName: self?.user.login ?? "", completionHandler: {
+            self?.service.setStatusOfNotesAdded(userName: self?.user.login ?? "", notes: withText, completionHandler: {
                     
+                if let userID = self?.user.id {
+                    self?.delegate?.didSaveNoteFor(userId: userID, notes: withText)
+                }
+                
                 self?.completionHandler?(.showAlert(withMessage: "User notes updated"))
             })
         }
