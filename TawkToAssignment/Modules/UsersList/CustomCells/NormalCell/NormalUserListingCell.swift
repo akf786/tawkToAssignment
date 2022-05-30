@@ -12,19 +12,23 @@ class NormalUserListingCell: UITableViewCell, BaseUserListCell {
     //MARK: - Outlets
     @IBOutlet weak var userNameLabel: UILabel! {
         didSet {
-            userNameLabel.textColor = AppConstants.Colors.headingColor
-            userNameLabel.font = AppConstants.Font.medium(size: 14)
+            userNameLabel.textColor = AppConstants.Colors.titleColor
+            userNameLabel.font = AppConstants.Font.medium(size: 16)
         }
     }
     
     @IBOutlet weak var userType: UILabel! {
         didSet {
-            userType.textColor = AppConstants.Colors.subtitleColor
+            userType.textColor = AppConstants.Colors.subHeadingColor
             userType.font = AppConstants.Font.medium(size: 12)
         }
     }
     
-    @IBOutlet weak var userImageView: UIImageView!
+    @IBOutlet weak var userImageView: UIImageView! {
+        didSet {
+            userImageView.clipsToBounds = true
+        }
+    }
     
     @IBOutlet weak var outerView: UIView! {
         didSet {
@@ -32,6 +36,11 @@ class NormalUserListingCell: UITableViewCell, BaseUserListCell {
         }
     }
     
+    @IBOutlet weak var imageOuterView: UIView! {
+        didSet {
+            imageOuterView.layer.cornerRadius = 25
+        }
+    }
     
     //MARK: - ViewModel Configuration
     func configure(viewModel: BaseUserListCellViewModel) {
@@ -44,7 +53,7 @@ class NormalUserListingCell: UITableViewCell, BaseUserListCell {
         if vm.profileSeen {
             self.outerView.backgroundColor = UIColor.gray.withAlphaComponent(0.1)
         } else {
-            self.outerView.backgroundColor = UIColor.white
+            self.outerView.backgroundColor = .clear
         }
         
         DispatchQueue.global(qos: .userInteractive).async {

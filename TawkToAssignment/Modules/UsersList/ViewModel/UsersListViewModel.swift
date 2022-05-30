@@ -25,6 +25,7 @@ protocol UsersListViewModel {
     func fetchUsers()
     func searchUser(text: String)
     func tappedAtCell(index: Int)
+    func viewDidLoad()
 }
 
 enum UsersListViewModelOutput {
@@ -33,5 +34,6 @@ enum UsersListViewModelOutput {
     case refreshData
     case showEmptyView
     case hideEmptyView
-    
+    case noInternet
+    case internetAvailable
 }

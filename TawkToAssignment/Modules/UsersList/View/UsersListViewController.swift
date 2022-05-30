@@ -24,6 +24,9 @@ class UsersListViewController: UIViewController {
         self.bindViewModel()
         self.title = viewModel?.title
         self.usersListingView.searchView.delegate = self
+        self.usersListingView.noInternetHeightCnst.constant = 0
+        self.viewModel?.viewDidLoad()
+        
         
     }
 
@@ -60,6 +63,19 @@ extension UsersListViewController {
                 DispatchQueue.main.async {
                     self?.usersListingView.emptyListView.isHidden = true
                 }
+                
+            case .noInternet:
+                DispatchQueue.main.async {
+                    self?.usersListingView.activityIndicator.stopAnimating()
+                    self?.usersListingView.noInternetHeightCnst.constant = 50
+                }
+                break
+                
+            case  .internetAvailable:
+                DispatchQueue.main.async {
+                    self?.usersListingView.noInternetHeightCnst.constant = 0
+                }
+                break
             
             }
         }

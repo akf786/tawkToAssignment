@@ -4,13 +4,12 @@
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
-        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="92" id="KGk-i7-Jjw" customClass="InvertedUserListingCell" customModule="TawkToAssignment" customModuleProvider="target">
+        <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="92" id="KGk-i7-Jjw" customClass="InvertedUserListingCell" customModule="TawkToAssignment" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="362" height="92"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
@@ -21,7 +20,7 @@
                         <rect key="frame" x="10" y="8" width="342" height="76"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="us9-d1-h0i">
-                                <rect key="frame" x="63" y="17.5" width="41.5" height="41"/>
+                                <rect key="frame" x="79" y="17.5" width="41.5" height="41"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qkt-yS-Ovm">
                                         <rect key="frame" x="0.0" y="0.0" width="41.5" height="20.5"/>
@@ -36,6 +35,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </stackView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="pencil" translatesAutoresizingMaskIntoConstraints="NO" id="EeA-kX-88S">
                                 <rect key="frame" x="296" y="23" width="30" height="30"/>
@@ -44,30 +44,28 @@
                                     <constraint firstAttribute="width" constant="30" id="VFP-YQ-1zJ"/>
                                 </constraints>
                             </imageView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zSa-pE-Pow">
+                            <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zSa-pE-Pow">
                                 <rect key="frame" x="5" y="13" width="50" height="50"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Ofk-jc-RTh">
                                         <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="50" id="A01-I9-yOm"/>
-                                            <constraint firstAttribute="width" constant="50" id="oea-DX-v6d"/>
-                                        </constraints>
                                     </imageView>
                                 </subviews>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="Ofk-jc-RTh" secondAttribute="bottom" id="FsS-zz-oau"/>
                                     <constraint firstAttribute="width" constant="50" id="PFE-RV-yxv"/>
                                     <constraint firstAttribute="height" constant="50" id="Wbv-BG-3p4"/>
-                                    <constraint firstItem="Ofk-jc-RTh" firstAttribute="centerX" secondItem="zSa-pE-Pow" secondAttribute="centerX" id="i7t-WF-7sZ"/>
-                                    <constraint firstItem="Ofk-jc-RTh" firstAttribute="centerY" secondItem="zSa-pE-Pow" secondAttribute="centerY" id="tXz-Lq-9uh"/>
+                                    <constraint firstItem="Ofk-jc-RTh" firstAttribute="leading" secondItem="zSa-pE-Pow" secondAttribute="leading" id="a0Z-6U-k4q"/>
+                                    <constraint firstItem="Ofk-jc-RTh" firstAttribute="top" secondItem="zSa-pE-Pow" secondAttribute="top" id="yCU-dm-nth"/>
+                                    <constraint firstAttribute="trailing" secondItem="Ofk-jc-RTh" secondAttribute="trailing" id="yYj-14-xha"/>
                                 </constraints>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="EeA-kX-88S" secondAttribute="trailing" constant="16" id="BEX-gx-BWb"/>
-                            <constraint firstItem="us9-d1-h0i" firstAttribute="leading" secondItem="zSa-pE-Pow" secondAttribute="trailing" constant="8" id="EGh-h0-OJF"/>
+                            <constraint firstItem="us9-d1-h0i" firstAttribute="leading" secondItem="zSa-pE-Pow" secondAttribute="trailing" constant="24" id="EGh-h0-OJF"/>
                             <constraint firstItem="us9-d1-h0i" firstAttribute="centerY" secondItem="zSa-pE-Pow" secondAttribute="centerY" id="Fdc-6I-hDN"/>
                             <constraint firstItem="zSa-pE-Pow" firstAttribute="centerY" secondItem="FGJ-2W-3CZ" secondAttribute="centerY" id="Mbj-Q8-uk4"/>
                             <constraint firstItem="zSa-pE-Pow" firstAttribute="leading" secondItem="FGJ-2W-3CZ" secondAttribute="leading" constant="5" id="Uof-PT-ick"/>
@@ -75,6 +73,7 @@
                         </constraints>
                     </view>
                 </subviews>
+                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 <constraints>
                     <constraint firstAttribute="bottom" secondItem="FGJ-2W-3CZ" secondAttribute="bottom" constant="8" id="Ia6-le-qg8"/>
                     <constraint firstAttribute="trailing" secondItem="FGJ-2W-3CZ" secondAttribute="trailing" constant="10" id="YFk-nc-fq1"/>
@@ -85,6 +84,7 @@
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <connections>
+                <outlet property="imageOuterView" destination="zSa-pE-Pow" id="ddd-kG-JjG"/>
                 <outlet property="notesIcon" destination="EeA-kX-88S" id="wyU-YQ-IHh"/>
                 <outlet property="outerView" destination="FGJ-2W-3CZ" id="J5r-Y1-Lsx"/>
                 <outlet property="userImageView" destination="Ofk-jc-RTh" id="Qwb-Ok-6Q4"/>
@@ -96,8 +96,5 @@
     </objects>
     <resources>
         <image name="pencil" width="512" height="512"/>
-        <systemColor name="systemBackgroundColor">
-            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
     </resources>
 </document>

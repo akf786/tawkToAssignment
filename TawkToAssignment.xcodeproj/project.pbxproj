@@ -50,6 +50,7 @@
 		FAF647EB2844DFC500361C77 /* UserProfileViewModelImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAF647EA2844DFC500361C77 /* UserProfileViewModelImpl.swift */; };
 		FAF647ED2844DFE400361C77 /* UserProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAF647EC2844DFE400361C77 /* UserProfileViewController.swift */; };
 		FAF647EF2844DFF500361C77 /* UserProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAF647EE2844DFF500361C77 /* UserProfileView.swift */; };
+		FAF647F12844E97700361C77 /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAF647F02844E97700361C77 /* Reachability.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -117,6 +118,7 @@
 		FAF647EA2844DFC500361C77 /* UserProfileViewModelImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileViewModelImpl.swift; sourceTree = "<group>"; };
 		FAF647EC2844DFE400361C77 /* UserProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileViewController.swift; sourceTree = "<group>"; };
 		FAF647EE2844DFF500361C77 /* UserProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileView.swift; sourceTree = "<group>"; };
+		FAF647F02844E97700361C77 /* Reachability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -271,6 +273,7 @@
 			children = (
 				FAF647A42844D68B00361C77 /* AppConstants.swift */,
 				FAF647A62844D6A900361C77 /* UserDefaultsManager.swift */,
+				FAF647F02844E97700361C77 /* Reachability.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -546,6 +549,7 @@
 				FAF647D22844DD0900361C77 /* InvertedUserListingCellViewModel.swift in Sources */,
 				FAF647A92844D6C100361C77 /* UIView+Ext.swift in Sources */,
 				FAF6479F2844D60E00361C77 /* User.swift in Sources */,
+				FAF647F12844E97700361C77 /* Reachability.swift in Sources */,
 				FAF647AB2844D6D400361C77 /* UIColor+Ext.swift in Sources */,
 				FAF647EF2844DFF500361C77 /* UserProfileView.swift in Sources */,
 				FAF647C72844DC0A00361C77 /* Configuration.swift in Sources */,

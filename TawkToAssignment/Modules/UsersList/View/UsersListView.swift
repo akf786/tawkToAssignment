@@ -11,11 +11,22 @@ class UsersListView: UIView {
 
     @IBOutlet weak var searchView: SearchBar!
     
+    @IBOutlet weak var noInternetView: UIView!
+    
+    @IBOutlet weak var noInternetHeightCnst: NSLayoutConstraint!
+    
+    @IBOutlet weak var noInternetLabel: UILabel! {
+        didSet {
+            noInternetLabel.textColor = AppConstants.Colors.appWhiteColor
+            noInternetLabel.font = AppConstants.Font.medium(size: 16)
+        }
+    }
     
     @IBOutlet weak var tableView: UITableView! {
         didSet {
             tableView.tableFooterView = UIView()
             tableView.separatorColor = .clear
+            tableView.keyboardDismissMode = .onDrag
         }
     }
     

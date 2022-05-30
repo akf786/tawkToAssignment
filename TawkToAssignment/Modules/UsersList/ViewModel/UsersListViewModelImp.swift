@@ -6,6 +6,7 @@
 //
 
 import Foundation
+
 class UsersListViewModelImp: UsersListViewModel {
     
     private var users = [User]()
@@ -31,6 +32,11 @@ class UsersListViewModelImp: UsersListViewModel {
         self.fetchUsersList()
     }
     
+    func viewDidLoad() {
+        self.fetchSavedUserList()
+        self.fetchUsers()
+    }
+    
     
     //MARK: - Computed Properties
     var numberOfRows: Int {
@@ -47,12 +53,16 @@ class UsersListViewModelImp: UsersListViewModel {
         return self.cellViewModels[index]
     }
     
+    
     func fetchUsers() {
         if !self.isApiCalled && !self.isSearching {
             ///If internet is connected then fetch list
-//            if Reachability.isConnectedToNetwork() {
+            if Reachability.isConnectedToNetwork() {
                 self.fetchUsersList()
-//            }
+                self.completionHandler?(.internetAvailable)
+            } else {
+                self.completionHandler?(.noInternet)
+            }
         }
     }
     
