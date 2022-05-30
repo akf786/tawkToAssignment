@@ -19,6 +19,10 @@ protocol DataStore {
 
 class DataStoreImp: DataStore {
     
+    private var requests = [URLRequest]()
+    private let queue = DispatchQueue.global(qos: .background)
+    private let semaphore = DispatchSemaphore(value: 1)
+    
     func getUserProfile(userName: String, completionHandler: @escaping (Result<Data, NetworkError>) -> Void) {
         
         let urlString = String.init(format: "%@%@", AppConstants.EndPoints.getUserProfile,userName)
@@ -29,17 +33,17 @@ class DataStoreImp: DataStore {
         
         var request = URLRequest(url: url)
         request.httpMethod = "GET"
-        
-        let task = URLSession.shared.dataTask(with: request as URLRequest, completionHandler: { data, response, error in
-            
-            guard let data = data else {
+        self.requests.append(request)
+        self.getResponseFromServerFor(request: request) { result in
+            switch result {
+            case .failure(_):
                 completionHandler(.failure(.serverError))
-                return
+                
+            case .success(let data):
+                completionHandler(.success(data))
+                break
             }
-            
-            completionHandler(.success(data))
-        })
-        task.resume()
+        }
         
     }
     
@@ -61,16 +65,41 @@ class DataStoreImp: DataStore {
         var request = URLRequest(url: url)
         request.httpMethod = "GET"
         
-        let task = URLSession.shared.dataTask(with: request as URLRequest, completionHandler: { data, response, error in
-            
-            guard let data = data else {
+        self.requests.append(request)
+        self.getResponseFromServerFor(request: request) { result in
+            switch result {
+            case .failure(_):
                 completionHandler(.failure(.serverError))
-                return
+                
+            case .success(let data):
+                completionHandler(.success(data))
+                break
             }
-            
-            completionHandler(.success(data))
-        })
-        task.resume()
+        }
+        
     }
+    
+    
+    
+    func getResponseFromServerFor(request: URLRequest, completionHandler: @escaping (Result<Data, NetworkError>) -> Void) {
+        queue.async {
+            self.semaphore.wait()
+            
+            
+            let task = URLSession.shared.dataTask(with: request as URLRequest, completionHandler: { data, response, error in
+                
+                guard let data = data else {
+                    completionHandler(.failure(.serverError))
+                    return
+                }
+                
+                self.semaphore.signal()
+                completionHandler(.success(data))
+            })
+            task.resume()
+            
+        }
+    }
+    
     
 }

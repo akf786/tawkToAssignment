@@ -15,19 +15,17 @@ extension UIImageView {
     
     //MARK: - Download Image Network Call
     static func downloadImageData(from url: URL, completion: @escaping (_ data: Data?) -> () ) {
-        
-        URLSession.shared.dataTask(with: url) { data, response, error in
-            guard
-                let httpURLResponse = response as? HTTPURLResponse, httpURLResponse.statusCode == 200,
-                let mimeType = response?.mimeType, mimeType.hasPrefix("image"),
-                let data = data, error == nil else {
+        let request = URLRequest(url: url)
+        DataStoreImp().getResponseFromServerFor(request: request) { result in
+            switch result {
+            case .failure(_):
                 completion(nil)
-                return
+                
+            case .success(let data):
+                completion(data)
+                break
             }
-            
-            completion(data)
-            
-        }.resume()
+        }
     }
     
     
