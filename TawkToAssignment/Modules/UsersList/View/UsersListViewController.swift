@@ -75,12 +75,14 @@ extension UsersListViewController {
                 DispatchQueue.main.async {
                     self?.usersListingView.activityIndicator.stopAnimating()
                     self?.usersListingView.noInternetHeightCnst.constant = 50
+                    self?.usersListingView.noInternetLabel.isHidden = false
                 }
                 break
                 
             case  .internetAvailable:
                 DispatchQueue.main.async {
                     self?.usersListingView.noInternetHeightCnst.constant = 0
+                    self?.usersListingView.noInternetLabel.isHidden = true
                 }
                 break
             

@@ -89,6 +89,7 @@ class DataStoreImp: DataStore {
             let task = URLSession.shared.dataTask(with: request as URLRequest, completionHandler: { data, response, error in
                 
                 guard let data = data else {
+                    self.semaphore.signal()
                     completionHandler(.failure(.serverError))
                     return
                 }

@@ -29,7 +29,7 @@ class UsersListViewModelImp: UsersListViewModel {
         self.users = users
         self.since = UserDefaultsManager.shared.getSinceValue()
         self.fetchSavedUserList()
-        self.fetchUsersList()
+        
     }
     
     func viewDidLoad() {
@@ -86,29 +86,27 @@ class UsersListViewModelImp: UsersListViewModel {
             
             let viewModel: BaseUserListCellViewModel
             
-            if user.isNotesAdded {
-                viewModel = NoteUserListingCellViewModel(userName: user.login ?? "",
-                                                         userType: user.type ?? "",
-                                                         imageURL: URL(string: user.avatarURL ?? ""),
-                                                         profileSeen: user.isSeen)
+            let isInvertedCell = count % 4 == 0
+            if isInvertedCell {
+                viewModel = InvertedUserListingCellViewModel(userName: user.login ?? "",
+                                                             userType: user.type ?? "",
+                                                             imageURL: URL(string: user.avatarURL ?? ""),
+                                                             profileSeen: user.isSeen,
+                                                             notesAdded: user.isNotesAdded)
             } else {
-                viewModel = NormalUserListingCellViewModel(userName: user.login ?? "",
-                                                           userType: user.type ?? "",
-                                                           imageURL: URL(string: user.avatarURL ?? ""),
-                                                           profileSeen: user.isSeen)
+                if user.isNotesAdded {
+                    viewModel = NoteUserListingCellViewModel(userName: user.login ?? "",
+                                                             userType: user.type ?? "",
+                                                             imageURL: URL(string: user.avatarURL ?? ""),
+                                                             profileSeen: user.isSeen)
+                } else {
+                    viewModel = NormalUserListingCellViewModel(userName: user.login ?? "",
+                                                               userType: user.type ?? "",
+                                                               imageURL: URL(string: user.avatarURL ?? ""),
+                                                               profileSeen: user.isSeen)
+                }
             }
-            
-//            if count % 4 == 0 {
-//                viewModel = InvertedUserListingCellViewModel(userName: user.login ?? "",
-//                                                             userType: user.type ?? "",
-//                                                             imageURL: URL(string: user.avatarURL ?? ""),
-//                                                             profileSeen: user.isSeen,
-//                                                             notesAdded: user.isNotesAdded)
-//
-//            } else {
-//
-//            }
-            
+                        
             self.cellViewModels.append(viewModel)
         }
         

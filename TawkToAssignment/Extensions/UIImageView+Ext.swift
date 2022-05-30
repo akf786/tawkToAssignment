@@ -12,6 +12,19 @@ var imageCache = NSCache<AnyObject, AnyObject>()
 
 extension UIImageView {
     
+    func invertImage(realImage: UIImage, completion: @escaping (_ image: UIImage) -> ()) {
+        DispatchQueue.main.async {
+            if let cgImage = CIImage(image: realImage) {
+                if let filter = CIFilter(name: "CIColorInvert") {
+                    filter.setValue(cgImage, forKey: kCIInputImageKey)
+                    let newImage = UIImage(ciImage: filter.outputImage!)
+                    completion(newImage)
+                }
+            }
+        }
+        
+        
+    }
     
     //MARK: - Download Image Network Call
     static func downloadImageData(from url: URL, completion: @escaping (_ data: Data?) -> () ) {
@@ -44,9 +57,22 @@ extension UIImageView {
                 return
             }
             
-            imageCache.setObject(image, forKey: url.absoluteString as AnyObject)
+            
             DispatchQueue.main.async { [weak self] in
-                self?.image = image
+                guard let strongSelf = self else {
+                    return
+                }
+                if invertImage {
+                    strongSelf.invertImage(realImage: image, completion: { invertedImage in
+                        strongSelf.image = invertedImage.withRenderingMode(.alwaysOriginal)
+                        imageCache.setObject(invertedImage, forKey: url.absoluteString as AnyObject)
+                    })
+                } else {
+                    imageCache.setObject(image, forKey: url.absoluteString as AnyObject)
+                    strongSelf.image = image
+                }
+                
+                
             }
         }
     }
