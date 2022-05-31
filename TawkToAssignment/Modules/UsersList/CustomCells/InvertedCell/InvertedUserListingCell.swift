@@ -45,6 +45,7 @@ class InvertedUserListingCell: UITableViewCell, BaseUserListCell {
         }
     }
     
+    
     //MARK: - ViewModel Configuration
     func configure(viewModel: BaseUserListCellViewModel) {
         guard let vm = viewModel as? InvertedUserListingCellViewModel else {

@@ -43,6 +43,12 @@ class NoteUserListingCell: UITableViewCell, BaseUserListCell {
         }
     }
     
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        
+        self.userImageView.image = nil
+    }
+    
     //MARK: - ViewModel Configuration
     func configure(viewModel: BaseUserListCellViewModel) {
         guard let vm = viewModel as? NoteUserListingCellViewModel else {

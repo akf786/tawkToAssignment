@@ -190,6 +190,7 @@ extension UsersListViewModelImp: UserProfileViewModelDelegate {
         if let index = self.users.firstIndex(where: { $0.id == userId }) {
             self.users[index].isNotesAdded = true
             self.users[index].notes = notes
+            self.users[index].isSeen = true
             self.cellViewModels = []
             self.refreshData(self.users)
         }
