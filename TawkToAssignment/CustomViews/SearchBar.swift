@@ -49,7 +49,7 @@ class SearchBar: UIView {
     
     @IBOutlet weak var searchFieldOuterView: UIView! {
         didSet {
-            searchFieldOuterView.backgroundColor = UIColor(hexString: "#F5F5F5")
+            searchFieldOuterView.backgroundColor = UIColor.white
             searchFieldOuterView.layer.cornerRadius = 8
         }
     }

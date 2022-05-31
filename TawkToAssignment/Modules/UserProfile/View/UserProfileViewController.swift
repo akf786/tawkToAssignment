@@ -9,24 +9,38 @@ import UIKit
 
 class UserProfileViewController: UIViewController {
 
-    var viewModel: UserProfileViewModel?
-    
+    private var keyboardHeight: CGFloat = 0.0
+    private let keyboardNotificationNames = ["UIKeyboardWillShowNotification",
+                                             "UIKeyboardWillChangeFrameNotification",
+                                             "UIKeyboardWillHideNotification",
+                                             "UIKeyboardDidChangeFrameNotification"]
     
     //MARK: - Outlets
     @IBOutlet var userProfileView: UserProfileView!
     
+    
+    var viewModel: UserProfileViewModel?
     
     //MARK: - Override Methods
     override func viewDidLoad() {
         super.viewDidLoad()
 
         self.title = viewModel?.title
+        self.showInternetView()
         self.bindViewModel()
         self.viewModel?.viewDidLoad()
         self.addClickToDismissView()
-        self.view.backgroundColor = AppConstants.Colors.outerViewColor
+        self.view.backgroundColor = AppConstants.Colors.appBackgroundColor
         self.userProfileView.activityIndicator.stopAnimating()
         self.addNotificationObserver()
+        self.registerForKeyboardNotifications()
+        
+    }
+    
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        
+        userProfileView.bottomHeightCnst.constant = keyboardHeight
     }
     
     deinit {
@@ -55,7 +69,21 @@ class UserProfileViewController: UIViewController {
                 self.showNoInternetView()
             }
         }
-        
+    }
+    
+    @objc
+    func keyboardWillChangeFrame(_ notification: NSNotification) {
+        guard let keyboardEndFrameWindow = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect else {
+            return
+        }
+        let keyboardEndFrameView = userProfileView.convert(keyboardEndFrameWindow, from: nil)
+        if keyboardEndFrameView.origin.y == userProfileView.frame.size.height {
+            keyboardHeight = 0
+        } else {
+            keyboardHeight = keyboardEndFrameView.size.height
+        }
+        self.view.setNeedsLayout()
+        self.view.layoutIfNeeded()
     }
     
 }
@@ -150,5 +178,21 @@ extension UserProfileViewController {
         self.userProfileView.noInternetHeightCnst.constant = 0
         self.userProfileView.noInternetLabel.isHidden = true
     }
+    
+    private func registerForKeyboardNotifications() {
+        for notification in keyboardNotificationNames {
+            NotificationCenter.default.addObserver(self,
+                                                   selector: #selector(keyboardWillChangeFrame(_:)),
+                                                   name: NSNotification.Name(notification),
+                                                   object: nil)
+        }
+    }
+    
+    private func removeForKeyBoardNotification() {
+        for notification in keyboardNotificationNames {
+            NotificationCenter.default.removeObserver(self, name: NSNotification.Name(notification), object: nil)
+        }
+    }
+
     
 }

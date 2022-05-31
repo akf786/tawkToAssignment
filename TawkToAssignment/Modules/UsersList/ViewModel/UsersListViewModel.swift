@@ -8,7 +8,7 @@
 import Foundation
 typealias UsersListViewModelOutputHandler = (UsersListViewModelOutput) -> ()
 
-protocol UsersListViewModelCoordinatorDelegate : class {
+protocol UsersListViewModelCoordinatorDelegate : AnyObject {
     func didTapOnUser(user: User, delegate: UsersListViewModelImp)
 }
 

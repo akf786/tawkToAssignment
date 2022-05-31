@@ -159,7 +159,7 @@
                                         <rect key="frame" x="0.0" y="0.0" width="374" height="728"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pL8-Fx-cQf">
-                                                <rect key="frame" x="0.0" y="0.0" width="374" height="728"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="374" height="845"/>
                                                 <subviews>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="njR-wx-poP">
                                                         <rect key="frame" x="87" y="16" width="200" height="200"/>
@@ -252,10 +252,10 @@
                                                         </subviews>
                                                     </stackView>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eAL-hc-RVQ">
-                                                        <rect key="frame" x="16" y="575" width="342" height="33"/>
+                                                        <rect key="frame" x="16" y="575" width="342" height="150"/>
                                                         <subviews>
                                                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Write your notes here.. " textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="EVX-9f-NAp">
-                                                                <rect key="frame" x="0.0" y="0.0" width="342" height="33"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="342" height="150"/>
                                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                                 <color key="textColor" systemColor="labelColor"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -264,6 +264,7 @@
                                                         </subviews>
                                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                         <constraints>
+                                                            <constraint firstAttribute="height" constant="150" id="NEC-nh-uXC"/>
                                                             <constraint firstItem="EVX-9f-NAp" firstAttribute="top" secondItem="eAL-hc-RVQ" secondAttribute="top" id="VEu-68-QzT"/>
                                                             <constraint firstAttribute="bottom" secondItem="EVX-9f-NAp" secondAttribute="bottom" id="a1S-Kb-1Wf"/>
                                                             <constraint firstAttribute="trailing" secondItem="EVX-9f-NAp" secondAttribute="trailing" id="cQD-GH-rIi"/>
@@ -271,7 +272,7 @@
                                                         </constraints>
                                                     </view>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PPm-vQ-3g3">
-                                                        <rect key="frame" x="112" y="628" width="150" height="50"/>
+                                                        <rect key="frame" x="112" y="745" width="150" height="50"/>
                                                         <subviews>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Lrt-sc-nQ7">
                                                                 <rect key="frame" x="0.0" y="0.0" width="150" height="50"/>
@@ -291,7 +292,7 @@
                                                         </constraints>
                                                     </view>
                                                 </subviews>
-                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
                                                     <constraint firstItem="njR-wx-poP" firstAttribute="centerX" secondItem="pL8-Fx-cQf" secondAttribute="centerX" id="4PX-wa-DF1"/>
                                                     <constraint firstAttribute="trailing" secondItem="eAL-hc-RVQ" secondAttribute="trailing" constant="16" id="5kh-4s-x4O"/>
@@ -310,6 +311,7 @@
                                                 </constraints>
                                             </view>
                                         </subviews>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="trailing" secondItem="pL8-Fx-cQf" secondAttribute="trailing" id="1HQ-ut-pkf"/>
                                             <constraint firstItem="pL8-Fx-cQf" firstAttribute="width" secondItem="63m-DC-0e5" secondAttribute="width" id="3r0-3r-Yem"/>
@@ -320,7 +322,7 @@
                                         </constraints>
                                     </scrollView>
                                 </subviews>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstItem="63m-DC-0e5" firstAttribute="top" secondItem="sEY-1m-ipE" secondAttribute="top" id="9Uj-ce-ZHb"/>
                                     <constraint firstItem="63m-DC-0e5" firstAttribute="leading" secondItem="sEY-1m-ipE" secondAttribute="leading" id="H1E-VC-M0K"/>
@@ -351,6 +353,7 @@
                         </constraints>
                         <connections>
                             <outlet property="activityIndicator" destination="dMP-Ii-Cui" id="9S0-Lc-aa2"/>
+                            <outlet property="bottomHeightCnst" destination="nNC-o2-Fdp" id="e05-bx-Phg"/>
                             <outlet property="followersCount" destination="gDu-Dt-J5M" id="6tj-cN-6hd"/>
                             <outlet property="followersLabel" destination="tmf-h0-MUv" id="bNq-ME-ylu"/>
                             <outlet property="followingCount" destination="8ZD-W8-m9C" id="mT4-8v-fLG"/>

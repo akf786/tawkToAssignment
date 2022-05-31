@@ -9,7 +9,9 @@ import UIKit
 
 class UsersListViewController: UIViewController {
 
-    private var footerActivityIndicator: UIActivityIndicatorView?
+    private var lazyLoadingFooterView: UIView!
+    private var indicator: UIActivityIndicatorView!
+    
     var viewModel: UsersListViewModel?
     
     //MARK: - Outlets
@@ -29,6 +31,7 @@ class UsersListViewController: UIViewController {
         self.usersListingView.noInternetHeightCnst.constant = 0
         self.viewModel?.viewDidLoad()
         self.addNotificationObserver()
+        self.setupBottomSpinner()
         
     }
     
@@ -112,6 +115,16 @@ extension UsersListViewController {
 //MARK: - Private Methods
 extension UsersListViewController {
     
+    private func setupBottomSpinner() {
+        indicator = UIActivityIndicatorView(style: UIActivityIndicatorView.Style.medium)
+        indicator.hidesWhenStopped = true
+        indicator.startAnimating()
+        indicator.frame = CGRect(x: UIScreen.main.bounds.width/2, y: 15, width: 20, height: 20)
+        
+        lazyLoadingFooterView = UIView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 50))
+        lazyLoadingFooterView.addSubview(indicator)
+    }
+    
     private func registerNibs() {
         self.usersListingView.tableView.register(nibClassType: NormalUserListingCell.self)
         self.usersListingView.tableView.register(nibClassType: InvertedUserListingCell.self)
@@ -184,7 +197,8 @@ extension UsersListViewController: UITableViewDelegate, UITableViewDataSource {
         guard let viewModel = viewModel else { return }
         
         if indexPath.row == viewModel.numberOfRows - 1 {
-            viewModel.fetchUsers(bottomScrolling: false)
+            self.usersListingView.tableView.tableFooterView = lazyLoadingFooterView
+            viewModel.fetchUsers(bottomScrolling: true)
         }
     }
     

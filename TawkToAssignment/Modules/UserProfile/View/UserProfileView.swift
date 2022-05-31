@@ -31,7 +31,6 @@ class UserProfileView: UIView {
     
     @IBOutlet weak var userProfileImageOuterView: UIView! {
         didSet {
-            userProfileImageOuterView.layer.masksToBounds = false
             userProfileImageOuterView.layer.cornerRadius = 100
         }
     }
@@ -39,14 +38,14 @@ class UserProfileView: UIView {
     @IBOutlet weak var userProfileImage: UIImageView!
     @IBOutlet weak var userFullNameLabel: UILabel! {
         didSet {
-            userFullNameLabel.textColor = AppConstants.Colors.headingColor
+            userFullNameLabel.textColor = AppConstants.Colors.titleColor
             userFullNameLabel.font = AppConstants.Font.medium(size: 16)
         }
     }
     
     @IBOutlet weak var userNameLabel: UILabel!  {
         didSet {
-            userNameLabel.textColor = AppConstants.Colors.subtitleColor
+            userNameLabel.textColor = AppConstants.Colors.subHeadingColor
             userNameLabel.font = AppConstants.Font.medium(size: 14)
         }
     }
@@ -121,6 +120,9 @@ class UserProfileView: UIView {
             saveButton.setTitle("Save", for: .normal)
         }
     }
+    
+    @IBOutlet weak var bottomHeightCnst: NSLayoutConstraint!
+    
     
     //MARK: - Override Methods
     override func awakeFromNib() {
