@@ -11,18 +11,46 @@ import CoreData
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
+    private var isTimerRunningAlready = false
+    private var timer: Timer?
     var window:UIWindow?
     var appCoordinator: AppCoordinator?
-    
+        
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
         window = UIWindow(frame: UIScreen.main.bounds)
         appCoordinator = AppCoordinator(window: self.window, container: self.persistentContainer)
         appCoordinator?.start()
-        
         return true
     }
 
+    func startObservingInternetConnectivity() {
+        if !self.isTimerRunningAlready {
+            self.isTimerRunningAlready = true
+            timer = Timer.scheduledTimer(timeInterval: 2.0, target: self,
+                                         selector: #selector(self.checkNetworkConnection),
+                                         userInfo: nil,
+                                         repeats: true)
+            
+            
+            NotificationCenter.default.post(name: Notification.Name(AppConstants.Constants.notificationName), object: false)
+        }
+        
+    }
+    
+    func endObservingInternetConnectivity() {
+        self.isTimerRunningAlready = false
+        timer?.invalidate()
+    }
+    
+    @objc
+    func checkNetworkConnection() {
+        if Reachability.isConnectedToNetwork() {
+            NotificationCenter.default.post(name: Notification.Name(AppConstants.Constants.notificationName), object: true)
+            self.endObservingInternetConnectivity()
+        }
+    }
+    
     // MARK: - Core Data stack
     lazy var persistentContainer: NSPersistentContainer = {
         /*

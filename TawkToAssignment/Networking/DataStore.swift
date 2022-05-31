@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import UIKit
 
 enum NetworkError: String, Error {
     case serverError = "Server Error"
@@ -85,6 +86,13 @@ class DataStoreImp: DataStore {
         queue.async {
             self.semaphore.wait()
             
+            if !Reachability.isConnectedToNetwork() {
+                DispatchQueue.main.async {
+                    if let appDelegate = UIApplication.shared.delegate as? AppDelegate {
+                        appDelegate.startObservingInternetConnectivity()
+                    }
+                }
+            }
             
             let task = URLSession.shared.dataTask(with: request as URLRequest, completionHandler: { data, response, error in
                 

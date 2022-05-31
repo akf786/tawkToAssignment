@@ -9,6 +9,18 @@ import UIKit
 
 class UserProfileView: UIView {
 
+    
+    @IBOutlet weak var noInternetView: UIView!
+    
+    @IBOutlet weak var noInternetHeightCnst: NSLayoutConstraint!
+    
+    @IBOutlet weak var noInternetLabel: UILabel! {
+        didSet {
+            noInternetLabel.textColor = AppConstants.Colors.appWhiteColor
+            noInternetLabel.font = AppConstants.Font.medium(size: 16)
+        }
+    }
+    
     @IBOutlet weak var notesOuterView: UIView! {
         didSet {
             notesOuterView.layer.cornerRadius = 8

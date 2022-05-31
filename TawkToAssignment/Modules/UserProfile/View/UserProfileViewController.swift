@@ -26,9 +26,13 @@ class UserProfileViewController: UIViewController {
         self.addClickToDismissView()
         self.view.backgroundColor = AppConstants.Colors.outerViewColor
         self.userProfileView.activityIndicator.stopAnimating()
+        self.addNotificationObserver()
     }
     
-    
+    deinit {
+        print("Deinit called")
+        NotificationCenter.default.removeObserver(self)
+    }
     
     //MARK: - Actions
     @IBAction
@@ -39,6 +43,19 @@ class UserProfileViewController: UIViewController {
     @objc
     func singleTap(sender: UITapGestureRecognizer) {
         self.view.endEditing(true)
+    }
+    
+    @objc
+    func networkConnection(notification: NSNotification) {
+        if let internetAvailable = notification.object as? Bool {
+            if internetAvailable {
+                self.showInternetView()
+                self.viewModel?.viewDidLoad()
+            } else {
+                self.showNoInternetView()
+            }
+        }
+        
     }
     
 }
@@ -113,6 +130,25 @@ extension UserProfileViewController {
         singleTapGestureRecognizer.isEnabled = true
         singleTapGestureRecognizer.cancelsTouchesInView = false
         self.view.addGestureRecognizer(singleTapGestureRecognizer)
+    }
+    
+    private func addNotificationObserver() {
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(networkConnection(notification:)),
+                                               name: Notification.Name(AppConstants.Constants.notificationName),
+                                               object: nil)
+
+    }
+    
+    private func showNoInternetView() {
+        self.userProfileView.activityIndicator.stopAnimating()
+        self.userProfileView.noInternetHeightCnst.constant = 50
+        self.userProfileView.noInternetLabel.isHidden = false
+    }
+    
+    private func showInternetView() {
+        self.userProfileView.noInternetHeightCnst.constant = 0
+        self.userProfileView.noInternetLabel.isHidden = true
     }
     
 }

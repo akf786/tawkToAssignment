@@ -14,7 +14,7 @@ protocol UserProfileViewModelDelegate: AnyObject {
 
 class UserProfileViewModelImpl: UserProfileViewModel {
     
-    
+    var isProfileLoaded: Bool?
     weak var delegate: UserProfileViewModelDelegate?
     var userProfile: UserProfile?
     private var user: User
@@ -30,6 +30,7 @@ class UserProfileViewModelImpl: UserProfileViewModel {
     init(user: User, service: UsersService) {
         self.service = service
         self.user = user
+        self.isProfileLoaded = false
         
     }
     
@@ -42,7 +43,9 @@ class UserProfileViewModelImpl: UserProfileViewModel {
     
     //MARK: - Helper Methods
     func viewDidLoad() {
-        self.getUserProfile()
+        if !(self.isProfileLoaded ?? false) {
+            self.getUserProfile()
+        }
     }
     
     func saveNotes(withText: String) {
@@ -74,6 +77,7 @@ extension UserProfileViewModelImpl {
             
             case .success(let profile):
                 self?.userProfile = profile
+                self?.isProfileLoaded = true
                 self?.completionHandler?(.updateProfile)
                 
             case .failure(_):

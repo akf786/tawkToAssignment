@@ -135,14 +135,31 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6lo-Ye-qA3" userLabel="NoInternetView">
+                                <rect key="frame" x="0.0" y="54" width="414" height="50"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No Internet Connection. Please try again later." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JkZ-Lh-uyP">
+                                        <rect key="frame" x="33" y="15" width="348.5" height="20.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemRedColor"/>
+                                <constraints>
+                                    <constraint firstItem="JkZ-Lh-uyP" firstAttribute="centerY" secondItem="6lo-Ye-qA3" secondAttribute="centerY" id="JSO-L2-Lo1"/>
+                                    <constraint firstAttribute="height" constant="50" id="Tgs-te-g52"/>
+                                    <constraint firstItem="JkZ-Lh-uyP" firstAttribute="centerX" secondItem="6lo-Ye-qA3" secondAttribute="centerX" id="VRc-OQ-94c"/>
+                                </constraints>
+                            </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sEY-1m-ipE">
-                                <rect key="frame" x="20" y="64" width="374" height="778"/>
+                                <rect key="frame" x="20" y="114" width="374" height="728"/>
                                 <subviews>
                                     <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="63m-DC-0e5">
-                                        <rect key="frame" x="0.0" y="0.0" width="374" height="778"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="374" height="728"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pL8-Fx-cQf">
-                                                <rect key="frame" x="0.0" y="0.0" width="374" height="778"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="374" height="728"/>
                                                 <subviews>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="njR-wx-poP">
                                                         <rect key="frame" x="87" y="16" width="200" height="200"/>
@@ -235,10 +252,10 @@
                                                         </subviews>
                                                     </stackView>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eAL-hc-RVQ">
-                                                        <rect key="frame" x="16" y="575" width="342" height="83"/>
+                                                        <rect key="frame" x="16" y="575" width="342" height="33"/>
                                                         <subviews>
                                                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Write your notes here.. " textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="EVX-9f-NAp">
-                                                                <rect key="frame" x="0.0" y="0.0" width="342" height="83"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="342" height="33"/>
                                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                                 <color key="textColor" systemColor="labelColor"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -254,7 +271,7 @@
                                                         </constraints>
                                                     </view>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PPm-vQ-3g3">
-                                                        <rect key="frame" x="112" y="678" width="150" height="50"/>
+                                                        <rect key="frame" x="112" y="628" width="150" height="50"/>
                                                         <subviews>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Lrt-sc-nQ7">
                                                                 <rect key="frame" x="0.0" y="0.0" width="150" height="50"/>
@@ -322,12 +339,15 @@
                         <viewLayoutGuide key="safeArea" id="uXA-B4-oPZ"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="sEY-1m-ipE" firstAttribute="top" secondItem="uXA-B4-oPZ" secondAttribute="top" constant="20" id="8bR-13-pX0"/>
                             <constraint firstItem="dMP-Ii-Cui" firstAttribute="centerX" secondItem="4Cy-B1-k5M" secondAttribute="centerX" id="KmY-97-FGh"/>
+                            <constraint firstItem="sEY-1m-ipE" firstAttribute="top" secondItem="6lo-Ye-qA3" secondAttribute="bottom" constant="10" id="NC6-uH-TXV"/>
                             <constraint firstItem="dMP-Ii-Cui" firstAttribute="centerY" secondItem="4Cy-B1-k5M" secondAttribute="centerY" id="Ogd-TE-B9r"/>
                             <constraint firstItem="sEY-1m-ipE" firstAttribute="leading" secondItem="uXA-B4-oPZ" secondAttribute="leading" constant="20" id="ZNr-3p-RIx"/>
                             <constraint firstItem="uXA-B4-oPZ" firstAttribute="trailing" secondItem="sEY-1m-ipE" secondAttribute="trailing" constant="20" id="cha-fQ-mXb"/>
+                            <constraint firstItem="6lo-Ye-qA3" firstAttribute="leading" secondItem="uXA-B4-oPZ" secondAttribute="leading" id="ias-gh-QTs"/>
                             <constraint firstItem="uXA-B4-oPZ" firstAttribute="bottom" secondItem="sEY-1m-ipE" secondAttribute="bottom" constant="20" id="nNC-o2-Fdp"/>
+                            <constraint firstItem="6lo-Ye-qA3" firstAttribute="trailing" secondItem="uXA-B4-oPZ" secondAttribute="trailing" id="rJH-A5-IFu"/>
+                            <constraint firstItem="6lo-Ye-qA3" firstAttribute="top" secondItem="uXA-B4-oPZ" secondAttribute="top" constant="10" id="v4l-if-A5L"/>
                         </constraints>
                         <connections>
                             <outlet property="activityIndicator" destination="dMP-Ii-Cui" id="9S0-Lc-aa2"/>
@@ -335,6 +355,9 @@
                             <outlet property="followersLabel" destination="tmf-h0-MUv" id="bNq-ME-ylu"/>
                             <outlet property="followingCount" destination="8ZD-W8-m9C" id="mT4-8v-fLG"/>
                             <outlet property="followingLabel" destination="QKc-f4-P5H" id="QBA-2m-8No"/>
+                            <outlet property="noInternetHeightCnst" destination="Tgs-te-g52" id="fuE-25-Bwl"/>
+                            <outlet property="noInternetLabel" destination="JkZ-Lh-uyP" id="UG2-Dz-Yqr"/>
+                            <outlet property="noInternetView" destination="6lo-Ye-qA3" id="mXU-ac-weZ"/>
                             <outlet property="notesOuterView" destination="eAL-hc-RVQ" id="LJL-2T-qpf"/>
                             <outlet property="notesTextView" destination="EVX-9f-NAp" id="U9B-OE-EXz"/>
                             <outlet property="outerView" destination="sEY-1m-ipE" id="TJm-pR-PIE"/>
@@ -354,7 +377,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Nuw-qo-Wqj" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="41" y="110"/>
+            <point key="canvasLocation" x="40.579710144927539" y="109.82142857142857"/>
         </scene>
     </scenes>
     <resources>

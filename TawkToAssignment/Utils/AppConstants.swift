@@ -22,6 +22,7 @@ class AppConstants {
         static let profile = "Profile"
         static let usersList = "Users"
         static let error = "Error"
+        static let notificationName = "NetworkConnectivity"
     }
     
     struct Colors {

@@ -12,6 +12,7 @@ protocol UserProfileViewModel {
     
     var service : UsersService { get }
     var userProfile: UserProfile? { get set }
+    var isProfileLoaded: Bool? { get set }
     var title: String { get }
     var completionHandler: UserProfileViewModelOutputHandler? { get set }
     var delegate: UserProfileViewModelDelegate? { get set }

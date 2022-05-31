@@ -22,7 +22,7 @@ protocol UsersListViewModel {
     var numberOfRows: Int { get }
     
     func getCellVMAt(index: Int) -> BaseUserListCellViewModel
-    func fetchUsers()
+    func fetchUsers(bottomScrolling: Bool?)
     func searchUser(text: String)
     func tappedAtCell(index: Int)
     func viewDidLoad()

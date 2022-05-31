@@ -54,15 +54,13 @@ class UsersListViewModelImp: UsersListViewModel {
     }
     
     
-    func fetchUsers() {
+    func fetchUsers(bottomScrolling: Bool? = false) {
         if !self.isApiCalled && !self.isSearching {
-            ///If internet is connected then fetch list
-            if Reachability.isConnectedToNetwork() {
                 self.fetchUsersList()
+                if !(bottomScrolling ?? false) {
+                    self.completionHandler?(.showLoader)
+                }
                 self.completionHandler?(.internetAvailable)
-            } else {
-                self.completionHandler?(.noInternet)
-            }
         }
     }
     
@@ -150,7 +148,6 @@ extension UsersListViewModelImp {
     }
     
     private func fetchUsersList() {
-        completionHandler?(.showLoader)
         self.isApiCalled = true
         
         self.service.getUsersList(since: self.since) { [weak self] result in

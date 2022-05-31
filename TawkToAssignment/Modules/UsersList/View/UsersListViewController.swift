@@ -9,6 +9,7 @@ import UIKit
 
 class UsersListViewController: UIViewController {
 
+    private var footerActivityIndicator: UIActivityIndicatorView?
     var viewModel: UsersListViewModel?
     
     //MARK: - Outlets
@@ -27,15 +28,34 @@ class UsersListViewController: UIViewController {
         self.usersListingView.searchView.delegate = self
         self.usersListingView.noInternetHeightCnst.constant = 0
         self.viewModel?.viewDidLoad()
-        
+        self.addNotificationObserver()
         
     }
-
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self,
+                                                  name: Notification.Name(AppConstants.Constants.notificationName),
+                                                  object: nil)
+    }
     
     //MARK: - Actions
     @objc
     func singleTap(sender: UITapGestureRecognizer) {
         self.view.endEditing(true)
+    }
+    
+    @objc
+    func networkConnection(notification: NSNotification) {
+        if let internetAvailable = notification.object as? Bool {
+            if internetAvailable {
+                self.showInternetView()
+                self.viewModel?.fetchUsers(bottomScrolling: false)
+            } else {
+                self.showNoInternetView()
+            }
+             
+        }
+        
     }
 }
 
@@ -73,16 +93,13 @@ extension UsersListViewController {
                 
             case .noInternet:
                 DispatchQueue.main.async {
-                    self?.usersListingView.activityIndicator.stopAnimating()
-                    self?.usersListingView.noInternetHeightCnst.constant = 50
-                    self?.usersListingView.noInternetLabel.isHidden = false
+                    self?.showNoInternetView()
                 }
                 break
                 
             case  .internetAvailable:
                 DispatchQueue.main.async {
-                    self?.usersListingView.noInternetHeightCnst.constant = 0
-                    self?.usersListingView.noInternetLabel.isHidden = true
+                    self?.showInternetView()
                 }
                 break
             
@@ -112,6 +129,25 @@ extension UsersListViewController {
         singleTapGestureRecognizer.isEnabled = true
         singleTapGestureRecognizer.cancelsTouchesInView = false
         self.view.addGestureRecognizer(singleTapGestureRecognizer)
+    }
+    
+    private func addNotificationObserver() {
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(networkConnection(notification:)),
+                                               name: Notification.Name(AppConstants.Constants.notificationName),
+                                               object: nil)
+
+    }
+    
+    private func showNoInternetView() {
+        self.usersListingView.activityIndicator.stopAnimating()
+        self.usersListingView.noInternetHeightCnst.constant = 50
+        self.usersListingView.noInternetLabel.isHidden = false
+    }
+    
+    private func showInternetView() {
+        self.usersListingView.noInternetHeightCnst.constant = 0
+        self.usersListingView.noInternetLabel.isHidden = true
     }
     
 }
@@ -148,7 +184,7 @@ extension UsersListViewController: UITableViewDelegate, UITableViewDataSource {
         guard let viewModel = viewModel else { return }
         
         if indexPath.row == viewModel.numberOfRows - 1 {
-            viewModel.fetchUsers()
+            viewModel.fetchUsers(bottomScrolling: false)
         }
     }
     
