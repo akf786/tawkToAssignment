@@ -26,15 +26,11 @@ class AppConstants {
     }
     
     struct Colors {
-        static let appBackgroundColor = UIColor(hexString: "#f9f9f9")
-        static let outerViewColor = UIColor(hexString: "#eaf4ff")
-        
-        static let titleColor = UIColor(hexString: "#40403f")
-        static let subHeadingColor = UIColor(hexString: "#838383")
+        static let appBackgroundColor = UIColor(named: "background")
+        static let titleColor = UIColor(named: "titleColor")
+        static let subHeadingColor = UIColor(named: "subHeadingColor")
         
         static let appWhiteColor = UIColor(hexString: "#ffffff")
-        static let headingColor = UIColor(hexString: "#576683")
-        static let subtitleColor = UIColor(hexString: "#a2a3a1")
         static let primaryColor = UIColor(hexString: "#2AADE0")
         
     }

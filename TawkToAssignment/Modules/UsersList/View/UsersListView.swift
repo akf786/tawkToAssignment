@@ -50,7 +50,7 @@ class UsersListView: UIView {
         
     @IBOutlet weak var emptyViewTitleLabel: UILabel! {
         didSet {
-            emptyViewTitleLabel.textColor = AppConstants.Colors.headingColor
+            emptyViewTitleLabel.textColor = AppConstants.Colors.titleColor
             emptyViewTitleLabel.font = AppConstants.Font.medium(size: 16)
         }
     }
