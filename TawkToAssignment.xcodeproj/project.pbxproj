@@ -12,7 +12,6 @@
 		FAF6476C2844D50D00361C77 /* TawkToAssignment.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = FAF6476A2844D50D00361C77 /* TawkToAssignment.xcdatamodeld */; };
 		FAF6476E2844D51E00361C77 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FAF6476D2844D51E00361C77 /* Assets.xcassets */; };
 		FAF647712844D51E00361C77 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FAF6476F2844D51E00361C77 /* LaunchScreen.storyboard */; };
-		FAF6477C2844D51E00361C77 /* TawkToAssignmentTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAF6477B2844D51E00361C77 /* TawkToAssignmentTests.swift */; };
 		FAF647862844D51E00361C77 /* TawkToAssignmentUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAF647852844D51E00361C77 /* TawkToAssignmentUITests.swift */; };
 		FAF647882844D51E00361C77 /* TawkToAssignmentUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAF647872844D51E00361C77 /* TawkToAssignmentUITestsLaunchTests.swift */; };
 		FAF6479D2844D5D500361C77 /* DataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAF6479C2844D5D500361C77 /* DataStore.swift */; };
@@ -51,6 +50,11 @@
 		FAF647ED2844DFE400361C77 /* UserProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAF647EC2844DFE400361C77 /* UserProfileViewController.swift */; };
 		FAF647EF2844DFF500361C77 /* UserProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAF647EE2844DFF500361C77 /* UserProfileView.swift */; };
 		FAF647F12844E97700361C77 /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAF647F02844E97700361C77 /* Reachability.swift */; };
+		FAF647F42845BF1100361C77 /* UserListingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAF647F32845BF1000361C77 /* UserListingTests.swift */; };
+		FAF647F82845BF4400361C77 /* Stubs.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAF647F72845BF4400361C77 /* Stubs.swift */; };
+		FAF647FA2845BF6F00361C77 /* DataStoreMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAF647F92845BF6F00361C77 /* DataStoreMock.swift */; };
+		FAF647FC2845BF8400361C77 /* UserProfileTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAF647FB2845BF8400361C77 /* UserProfileTests.swift */; };
+		FAF647FE2845C23400361C77 /* CoreDataTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAF647FD2845C23400361C77 /* CoreDataTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -79,7 +83,6 @@
 		FAF647702844D51E00361C77 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		FAF647722844D51E00361C77 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FAF647772844D51E00361C77 /* TawkToAssignmentTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TawkToAssignmentTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		FAF6477B2844D51E00361C77 /* TawkToAssignmentTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TawkToAssignmentTests.swift; sourceTree = "<group>"; };
 		FAF647812844D51E00361C77 /* TawkToAssignmentUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TawkToAssignmentUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		FAF647852844D51E00361C77 /* TawkToAssignmentUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TawkToAssignmentUITests.swift; sourceTree = "<group>"; };
 		FAF647872844D51E00361C77 /* TawkToAssignmentUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TawkToAssignmentUITestsLaunchTests.swift; sourceTree = "<group>"; };
@@ -119,6 +122,11 @@
 		FAF647EC2844DFE400361C77 /* UserProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileViewController.swift; sourceTree = "<group>"; };
 		FAF647EE2844DFF500361C77 /* UserProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileView.swift; sourceTree = "<group>"; };
 		FAF647F02844E97700361C77 /* Reachability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
+		FAF647F32845BF1000361C77 /* UserListingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserListingTests.swift; sourceTree = "<group>"; };
+		FAF647F72845BF4400361C77 /* Stubs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stubs.swift; sourceTree = "<group>"; };
+		FAF647F92845BF6F00361C77 /* DataStoreMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataStoreMock.swift; sourceTree = "<group>"; };
+		FAF647FB2845BF8400361C77 /* UserProfileTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileTests.swift; sourceTree = "<group>"; };
+		FAF647FD2845C23400361C77 /* CoreDataTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -188,7 +196,11 @@
 		FAF6477A2844D51E00361C77 /* TawkToAssignmentTests */ = {
 			isa = PBXGroup;
 			children = (
-				FAF6477B2844D51E00361C77 /* TawkToAssignmentTests.swift */,
+				FAF647F32845BF1000361C77 /* UserListingTests.swift */,
+				FAF647F72845BF4400361C77 /* Stubs.swift */,
+				FAF647F92845BF6F00361C77 /* DataStoreMock.swift */,
+				FAF647FB2845BF8400361C77 /* UserProfileTests.swift */,
+				FAF647FD2845C23400361C77 /* CoreDataTests.swift */,
 			);
 			path = TawkToAssignmentTests;
 			sourceTree = "<group>";
@@ -584,7 +596,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FAF6477C2844D51E00361C77 /* TawkToAssignmentTests.swift in Sources */,
+				FAF647FC2845BF8400361C77 /* UserProfileTests.swift in Sources */,
+				FAF647FE2845C23400361C77 /* CoreDataTests.swift in Sources */,
+				FAF647F42845BF1100361C77 /* UserListingTests.swift in Sources */,
+				FAF647FA2845BF6F00361C77 /* DataStoreMock.swift in Sources */,
+				FAF647F82845BF4400361C77 /* Stubs.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
