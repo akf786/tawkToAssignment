@@ -28,8 +28,6 @@ class UsersListViewModelImp: UsersListViewModel {
         self.service = service
         self.users = users
         self.since = UserDefaultsManager.shared.getSinceValue()
-        self.fetchSavedUserList()
-        
     }
     
     func viewDidLoad() {
@@ -56,16 +54,24 @@ class UsersListViewModelImp: UsersListViewModel {
     
     func fetchUsers(bottomScrolling: Bool? = false) {
         if !self.isApiCalled && !self.isSearching {
-                self.fetchUsersList()
-                if !(bottomScrolling ?? false) {
-                    self.completionHandler?(.showLoader)
-                }
-                self.completionHandler?(.internetAvailable)
+            self.fetchUsersList()
+            if !(bottomScrolling ?? false) {
+                self.completionHandler?(.showLoader)
+            }
+            self.completionHandler?(.internetAvailable)
         }
     }
     
     func tappedAtCell(index: Int) {
-        let user = self.users[index]
+        var user: User
+        ///Logic: If user is searching then it should get the user from searchedUsers Array else fetch from the normal users list
+        if isSearching {
+            user = self.searchedUsers[index]
+        } else {
+            user = self.users[index]
+        }
+        
+        ///Logic: On clicking any of the user profile saving the profile status to seen on DB
         self.service.setStatusToSeenFor(userName: user.login ?? "") { [weak self] in
             guard let weakSelf = self else {
                 return
@@ -84,6 +90,7 @@ class UsersListViewModelImp: UsersListViewModel {
             
             let viewModel: BaseUserListCellViewModel
             
+            ///Logic: For every fourth cell InvertedCell is being initialized otherwise if user has some notes then notes cell else normal cell
             let isInvertedCell = count % 4 == 0
             if isInvertedCell {
                 viewModel = InvertedUserListingCellViewModel(userName: user.login ?? "",
@@ -120,6 +127,8 @@ class UsersListViewModelImp: UsersListViewModel {
         } else {
             self.searchedUsers = []
             let list = self.users.filter { user in
+                
+                ///Logic: Searching user based on its username and also on the basis of its profile notes.
                 let isUserNameContains = user.login?.localizedCaseInsensitiveContains(text) ?? false
                 let isNotesContains = user.notes?.localizedCaseInsensitiveContains(text) ?? false
                 return isUserNameContains || isNotesContains
@@ -142,8 +151,8 @@ extension UsersListViewModelImp {
     }
  
     private func fetchSavedUserList() {
-        self.service.fetchLocalUserList { [weak self] users in
-            self?.refreshData(users ?? [])
+        self.service.fetchLocalUserList { [weak self] localUsersList in
+            self?.refreshData(localUsersList ?? [])
         }
     }
     
@@ -162,11 +171,12 @@ extension UsersListViewModelImp {
 
             switch result {
 
-            case .success(let users):
+            case .success(let newUsers):
+                
                 self.completionHandler?(.hideEmptyView)
-                self.since = Int(users.last?.id ?? 0)
+                self.since = Int(newUsers.last?.id ?? 0)
                 UserDefaultsManager.shared.saveLastSinceValue(self.since)
-                self.refreshData(users)
+                self.refreshData(newUsers)
                 
                 break
 
@@ -188,11 +198,20 @@ extension UsersListViewModelImp: UserProfileViewModelDelegate {
     
     func didSaveNoteFor(userId: Int16, notes: String) {
         if let index = self.users.firstIndex(where: { $0.id == userId }) {
+            ///Logic:  Changing status for a specific user on local array so it will reflect on coming back from user profile
             self.users[index].isNotesAdded = true
             self.users[index].notes = notes
             self.users[index].isSeen = true
             self.cellViewModels = []
-            self.refreshData(self.users)
+            self.appendCellViewModels(for: self.users)
+        }
+    }
+    
+    func didSaveProfile(userId: Int16) {
+        if let index = self.users.firstIndex(where: { $0.id == userId }) {
+            self.users[index].isSeen = true
+            self.cellViewModels = []
+            self.appendCellViewModels(for: self.users)
         }
     }
     

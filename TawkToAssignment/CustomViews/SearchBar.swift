@@ -113,7 +113,7 @@ class SearchBar: UIView {
     //MARK: - Private Methods
     private func startTimerforCallService(searchString: String) {
         timer?.invalidate()
-        if searchString.count > 2 {
+        if searchString.count > 0 {
             timer = Timer.scheduledTimer(timeInterval: 0.5,
                                          target: self,
                                          selector: #selector(timerCalled),
@@ -143,7 +143,7 @@ extension SearchBar: UITextFieldDelegate {
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         let text = textField.text ?? ""
-        if !text.isEmpty && text.count > 2 {
+        if !text.isEmpty && text.count > 0 {
             self.delegate?.searchText(text: text)
         }
         

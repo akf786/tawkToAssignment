@@ -81,6 +81,8 @@ extension UsersListViewController {
                 
             case .refreshData:
                 DispatchQueue.main.async {
+                    self?.indicator.stopAnimating()
+                    self?.usersListingView.tableView.tableFooterView = UIView()
                     self?.usersListingView.tableView.reloadData()
                 }
             

@@ -9,6 +9,7 @@ import Foundation
 
 protocol UserProfileViewModelDelegate: AnyObject {
     func didSaveNoteFor(userId: Int16, notes: String)
+    func didSaveProfile(userId: Int16)
 }
 
 
@@ -79,6 +80,10 @@ extension UserProfileViewModelImpl {
                 self?.userProfile = profile
                 self?.isProfileLoaded = true
                 self?.completionHandler?(.updateProfile)
+                if let ID = self?.user.id {
+                    self?.delegate?.didSaveProfile(userId: ID)
+                }
+                
                 
             case .failure(_):
                 break

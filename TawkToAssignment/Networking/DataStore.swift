@@ -62,7 +62,7 @@ class DataStoreImp: DataStore {
         guard let url = urlComponents?.url  else {
             return
         }
-        
+        print("My url string\(url.absoluteString)")
         var request = URLRequest(url: url)
         request.httpMethod = "GET"
         
